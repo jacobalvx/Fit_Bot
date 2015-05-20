@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
 
 	 has_many :trainings
 	 has_and_belongs_to_many :trainings, :class_name => "Training", :join_table => "athlete_trainings", :foreign_key => "training_id"
+
+
 end
