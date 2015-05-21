@@ -11,24 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519145704) do
+ActiveRecord::Schema.define(version: 20150521142733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "athlete_trainings", force: :cascade do |t|
-    t.integer "athlete_id"
-    t.integer "training_id"
+    t.integer  "athlete_id"
+    t.integer  "training_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  add_index "athlete_trainings", ["athlete_id"], name: "index_athlete_trainings_on_athlete_id", using: :btree
+  add_index "athlete_trainings", ["training_id"], name: "index_athlete_trainings_on_training_id", using: :btree
 
   create_table "trainings", force: :cascade do |t|
     t.integer  "trainer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "trainer_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
+  add_index "trainings", ["trainer_id"], name: "index_trainings_on_trainer_id", using: :btree
+
   create_table "users", force: :cascade do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "password"
     t.string   "role"
